@@ -1,0 +1,18 @@
+{
+  "name": "birthday-wishlist-app",
+  "version": "1.0.0",
+  "description": "A fun wishlist app for teenagers to share birthday wishes via WhatsApp with Amazon product suggestions",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install"
+  },
+  "keywords": ["wishlist", "birthday", "whatsapp", "amazon", "teenagers"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
