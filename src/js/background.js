@@ -1,12 +1,13 @@
 // Background Service Worker for FocusGuard+
-// Handles website blocking, task monitoring, and alarms
+// Handles website blocking, task monitoring, Pomodoro timer, and alarms
 
-importScripts('storage.js');
+importScripts('storage.js', 'pomodoro.js');
 
 // Initialize extension on install
 chrome.runtime.onInstalled.addListener(async (details) => {
   console.log('FocusGuard+ installed:', details.reason);
   await StorageManager.initialize();
+  await PomodoroManager.initialize();
 
   // Set up daily reset alarm
   chrome.alarms.create('dailyReset', {
@@ -25,6 +26,10 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
     await StorageManager.checkDailyReset();
   } else if (alarm.name === 'unlockCheck') {
     await checkAndUpdateBlockingRules();
+  } else if (alarm.name === 'pomodoroTimer') {
+    // Pomodoro session completed
+    await PomodoroManager.completeSession();
+    await checkAndUpdateBlockingRules(); // Update blocking based on new Pomodoro state
   }
 });
 
@@ -93,6 +98,59 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         sendResponse(quote);
         break;
 
+      // Pomodoro actions
+      case 'pomodoroStart':
+        const startResult = await PomodoroManager.startWork(message.taskId);
+        await checkAndUpdateBlockingRules();
+        sendResponse(startResult);
+        break;
+
+      case 'pomodoroStartBreak':
+        const breakResult = await PomodoroManager.startBreak(message.isLongBreak);
+        sendResponse(breakResult);
+        break;
+
+      case 'pomodoroPause':
+        const pauseResult = await PomodoroManager.pause();
+        sendResponse(pauseResult);
+        break;
+
+      case 'pomodoroResume':
+        const resumeResult = await PomodoroManager.resume();
+        sendResponse(resumeResult);
+        break;
+
+      case 'pomodoroStop':
+        const stopResult = await PomodoroManager.stop();
+        await checkAndUpdateBlockingRules();
+        sendResponse(stopResult);
+        break;
+
+      case 'pomodoroGetState':
+        const pomodoroState = await PomodoroManager.getState();
+        sendResponse(pomodoroState);
+        break;
+
+      case 'pomodoroGetSettings':
+        const pomodoroSettings = await PomodoroManager.getSettings();
+        sendResponse(pomodoroSettings);
+        break;
+
+      case 'pomodoroUpdateSettings':
+        const updatedSettings = await PomodoroManager.updateSettings(message.settings);
+        sendResponse(updatedSettings);
+        break;
+
+      case 'pomodoroGetStats':
+        const pomodoroStats = await PomodoroManager.getStats();
+        sendResponse(pomodoroStats);
+        break;
+
+      case 'pomodoroGetRemainingTime':
+        const remainingTime = await PomodoroManager.getRemainingTime();
+        sendResponse({ remainingTime });
+        break;
+
       default:
         sendResponse({ error: 'Unknown action' });
     }
@@ -104,10 +162,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 // Initialize on startup
 chrome.runtime.onStartup.addListener(async () => {
   await StorageManager.initialize();
+  await PomodoroManager.initialize();
   await checkAndUpdateBlockingRules();
 });
 
 // Check and update rules immediately
-checkAndUpdateBlockingRules();
+(async () => {
+  await StorageManager.initialize();
+  await PomodoroManager.initialize();
+  await checkAndUpdateBlockingRules();
+})();
 
 console.log('FocusGuard+ background service worker loaded');

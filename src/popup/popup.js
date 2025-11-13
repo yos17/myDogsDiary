@@ -88,9 +88,122 @@ document.getElementById('settingsBtn').addEventListener('click', () => {
   });
 });
 
+// Pomodoro Timer Management
+async function loadPomodoroState() {
+  try {
+    const state = await chrome.runtime.sendMessage({ action: 'pomodoroGetState' });
+    const settings = await chrome.runtime.sendMessage({ action: 'pomodoroGetSettings' });
+
+    const pomodoroSection = document.getElementById('pomodoroSection');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const timerLabel = document.getElementById('timerLabel');
+    const sessionCount = document.getElementById('pomodoroSessionCount');
+    const startBtn = document.getElementById('pomodoroStartBtn');
+    const pauseBtn = document.getElementById('pomodoroPauseBtn');
+    const stopBtn = document.getElementById('pomodoroStopBtn');
+
+    // Update session count
+    sessionCount.textContent = `${state.sessionCount}/${settings.sessionsUntilLongBreak}`;
+
+    // Get remaining time
+    const { remainingTime } = await chrome.runtime.sendMessage({ action: 'pomodoroGetRemainingTime' });
+
+    // Format time display
+    const minutes = Math.floor(remainingTime / (1000 * 60));
+    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+    timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+    // Update UI based on state
+    pomodoroSection.className = 'pomodoro-section';
+
+    if (state.state === 'idle') {
+      timerLabel.textContent = 'Ready to focus';
+      startBtn.style.display = 'block';
+      pauseBtn.style.display = 'none';
+      stopBtn.style.display = 'none';
+    } else if (state.state === 'work') {
+      pomodoroSection.classList.add('work');
+      timerLabel.textContent = state.isPaused ? 'Paused - Work Session' : 'Work Session';
+      startBtn.style.display = 'none';
+      pauseBtn.style.display = state.isPaused ? 'none' : 'block';
+      pauseBtn.textContent = '⏸ Pause';
+      stopBtn.style.display = 'block';
+
+      if (state.isPaused) {
+        const resumeBtn = pauseBtn.cloneNode(true);
+        resumeBtn.textContent = '▶ Resume';
+        resumeBtn.style.display = 'block';
+        pauseBtn.replaceWith(resumeBtn);
+        document.getElementById('pomodoroPauseBtn').addEventListener('click', handlePomodoroResume);
+      }
+    } else if (state.state === 'short_break' || state.state === 'long_break') {
+      pomodoroSection.classList.add('break');
+      timerLabel.textContent = state.state === 'long_break' ? 'Long Break ☕' : 'Short Break ☕';
+      startBtn.style.display = 'none';
+      pauseBtn.style.display = 'none';
+      stopBtn.style.display = 'block';
+    }
+  } catch (error) {
+    console.error('Failed to load Pomodoro state:', error);
+  }
+}
+
+// Pomodoro button handlers
+async function handlePomodoroStart() {
+  try {
+    await chrome.runtime.sendMessage({ action: 'pomodoroStart' });
+    await loadPomodoroState();
+  } catch (error) {
+    console.error('Failed to start Pomodoro:', error);
+  }
+}
+
+async function handlePomodoroPause() {
+  try {
+    await chrome.runtime.sendMessage({ action: 'pomodoroPause' });
+    await loadPomodoroState();
+  } catch (error) {
+    console.error('Failed to pause Pomodoro:', error);
+  }
+}
+
+async function handlePomodoroResume() {
+  try {
+    await chrome.runtime.sendMessage({ action: 'pomodoroResume' });
+    await loadPomodoroState();
+  } catch (error) {
+    console.error('Failed to resume Pomodoro:', error);
+  }
+}
+
+async function handlePomodoroStop() {
+  try {
+    await chrome.runtime.sendMessage({ action: 'pomodoroStop' });
+    await loadPomodoroState();
+  } catch (error) {
+    console.error('Failed to stop Pomodoro:', error);
+  }
+}
+
+// Pomodoro event listeners
+document.getElementById('pomodoroStartBtn').addEventListener('click', handlePomodoroStart);
+document.getElementById('pomodoroPauseBtn').addEventListener('click', handlePomodoroPause);
+document.getElementById('pomodoroStopBtn').addEventListener('click', handlePomodoroStop);
+
+// Listen for Pomodoro state changes from background
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.action === 'pomodoroStateChanged') {
+    loadPomodoroState();
+  }
+});
+
 // Initialize
 loadQuote();
 loadStats();
+loadPomodoroState();
 
 // Refresh stats every 5 seconds
 setInterval(loadStats, 5000);
+
+// Update Pomodoro timer every second
+setInterval(loadPomodoroState, 1000);

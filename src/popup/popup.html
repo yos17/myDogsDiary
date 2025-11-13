@@ -38,6 +38,23 @@
       </div>
     </div>
 
+    <!-- Pomodoro Timer -->
+    <div class="pomodoro-section" id="pomodoroSection">
+      <div class="pomodoro-header">
+        <h2 class="section-title">🍅 Pomodoro</h2>
+        <span class="pomodoro-session-count" id="pomodoroSessionCount">0/4</span>
+      </div>
+      <div class="pomodoro-timer">
+        <div class="timer-display" id="timerDisplay">25:00</div>
+        <div class="timer-label" id="timerLabel">Ready to focus</div>
+      </div>
+      <div class="pomodoro-controls">
+        <button class="pomodoro-btn" id="pomodoroStartBtn">▶ Start</button>
+        <button class="pomodoro-btn" id="pomodoroPauseBtn" style="display: none;">⏸ Pause</button>
+        <button class="pomodoro-btn secondary" id="pomodoroStopBtn" style="display: none;">⏹ Stop</button>
+      </div>
+    </div>
+
     <!-- Quick Stats -->
     <div class="stats-grid">
       <div class="stat-card">
@@ -110,6 +127,7 @@
   </div>
 
   <script src="../js/storage.js"></script>
+  <script src="../js/pomodoro.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

@@ -337,3 +337,117 @@ body {
   color: #6B7280;
   font-weight: 500;
 }
+
+/* Pomodoro Timer Section */
+.pomodoro-section {
+  padding: 20px;
+  border-bottom: 1px solid #F3F4F6;
+  background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+}
+
+.pomodoro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.pomodoro-session-count {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #059669;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid #A7F3D0;
+}
+
+.pomodoro-timer {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.timer-display {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1A1A1A;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.timer-label {
+  font-size: 0.875rem;
+  color: #059669;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pomodoro-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.pomodoro-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #10B981;
+  color: white;
+}
+
+.pomodoro-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.pomodoro-btn:active {
+  transform: translateY(0);
+}
+
+.pomodoro-btn.secondary {
+  background: white;
+  color: #DC2626;
+  border: 2px solid #FEE2E2;
+}
+
+.pomodoro-btn.secondary:hover {
+  background: #FEF2F2;
+  border-color: #FCA5A5;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
+}
+
+.pomodoro-section.work {
+  background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+}
+
+.pomodoro-section.work .timer-label {
+  color: #92400E;
+}
+
+.pomodoro-section.work .pomodoro-session-count {
+  color: #92400E;
+  background: white;
+  border-color: #FDE68A;
+}
+
+.pomodoro-section.break {
+  background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+}
+
+.pomodoro-section.break .timer-label {
+  color: #1E40AF;
+}
+
+.pomodoro-section.break .pomodoro-session-count {
+  color: #1E40AF;
+  background: white;
+  border-color: #BFDBFE;
+}

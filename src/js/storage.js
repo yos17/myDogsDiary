@@ -173,6 +173,14 @@ const StorageManager = {
       return { block: false, reason: 'not_in_blocklist' };
     }
 
+    // Check if Pomodoro is enforcing blocking (only if PomodoroManager is available)
+    if (typeof PomodoroManager !== 'undefined') {
+      const pomodoroEnforcing = await PomodoroManager.shouldEnforceBlocking();
+      if (pomodoroEnforcing) {
+        return { block: true, reason: 'pomodoro_work_session' };
+      }
+    }
+
     // Check work hours
     const inWorkHours = await this.isInWorkHours();
 
