@@ -6,9 +6,9 @@
 
 body {
   width: 400px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: #f9fafb;
-  color: #1f2937;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #FAFAFA;
+  color: #1A1A1A;
 }
 
 .popup-container {
@@ -16,32 +16,34 @@ body {
 }
 
 .header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 20px;
-  color: white;
+  background: white;
+  padding: 24px 20px;
+  border-bottom: 1px solid #F3F4F6;
 }
 
 .title {
   font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1A1A1A;
+  letter-spacing: -0.02em;
 }
 
 .status-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 6px 12px;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
+  background: #F9FAFB;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
 }
 
 .status-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #10b981;
+  background: #10B981;
   animation: pulse 2s infinite;
 }
 
@@ -55,19 +57,20 @@ body {
 }
 
 .status-dot.blocked {
-  background: #ef4444;
+  background: #DC2626;
 }
 
 .status-text {
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #4B5563;
 }
 
 .quote-banner {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  background: #FFFBEB;
   padding: 20px;
   position: relative;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #FEF3C7;
 }
 
 .quote-content {
@@ -75,17 +78,19 @@ body {
 }
 
 .quote {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #78350f;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #78350F;
   font-style: italic;
   margin-bottom: 8px;
 }
 
 .author {
-  font-size: 0.85rem;
-  color: #92400e;
+  font-size: 0.8125rem;
+  color: #92400E;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .author::before {
@@ -96,11 +101,11 @@ body {
   position: absolute;
   top: 20px;
   right: 20px;
-  background: rgba(255, 255, 255, 0.5);
-  border: none;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(146, 64, 14, 0.1);
   width: 32px;
   height: 32px;
-  border-radius: 50%;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
@@ -111,33 +116,36 @@ body {
 
 .refresh-quote:hover {
   background: white;
-  transform: rotate(180deg);
+  transform: rotate(90deg);
+  border-color: rgba(146, 64, 14, 0.2);
 }
 
 .progress-section {
   padding: 20px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #F3F4F6;
 }
 
 .section-title {
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
   margin-bottom: 12px;
-  color: #374151;
+  color: #1A1A1A;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .progress-bar-container {
-  height: 12px;
-  background: #e5e7eb;
-  border-radius: 6px;
+  height: 10px;
+  background: #F3F4F6;
+  border-radius: 10px;
   overflow: hidden;
   margin-bottom: 10px;
 }
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #10b981, #059669);
-  border-radius: 6px;
+  background: #0D9488;
+  border-radius: 10px;
   transition: width 0.5s ease;
   width: 0%;
 }
@@ -146,64 +154,69 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.85rem;
-  color: #6b7280;
+  font-size: 0.8125rem;
+  color: #6B7280;
 }
 
 .streak {
-  font-weight: 600;
-  color: #f59e0b;
+  font-weight: 700;
+  color: #F59E0B;
+  font-variant-numeric: tabular-nums;
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 10px;
   padding: 20px;
-  background: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
+  background: #FAFAFA;
+  border-bottom: 1px solid #F3F4F6;
 }
 
 .stat-card {
   text-align: center;
-  padding: 15px;
+  padding: 16px 12px;
   background: white;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  border: 1px solid #F3F4F6;
 }
 
 .stat-card.highlight {
-  border-color: #ef4444;
-  background: #fef2f2;
+  border-color: #FEE2E2;
+  background: #FEF2F2;
 }
 
 .stat-value {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 5px;
+  color: #1A1A1A;
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 .stat-card.highlight .stat-value {
-  color: #dc2626;
+  color: #DC2626;
 }
 
 .stat-label {
-  font-size: 0.75rem;
-  color: #6b7280;
-  font-weight: 500;
+  font-size: 0.6875rem;
+  color: #6B7280;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .priority-summary {
   padding: 20px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #F3F4F6;
 }
 
 .priority-row {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .priority-row:last-child {
@@ -211,52 +224,53 @@ body {
 }
 
 .priority-badge {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: white;
   flex-shrink: 0;
 }
 
-.priority-badge.a { background: #dc2626; }
-.priority-badge.b { background: #ea580c; }
-.priority-badge.c { background: #ca8a04; }
-.priority-badge.d { background: #16a34a; }
-.priority-badge.e { background: #6b7280; }
+.priority-badge.a { background: #DC2626; }
+.priority-badge.b { background: #F97316; }
+.priority-badge.c { background: #F59E0B; }
+.priority-badge.d { background: #10B981; }
+.priority-badge.e { background: #6B7280; }
 
 .priority-bar-container {
   flex: 1;
-  height: 8px;
-  background: #e5e7eb;
-  border-radius: 4px;
+  height: 6px;
+  background: #F3F4F6;
+  border-radius: 3px;
   overflow: hidden;
 }
 
 .priority-bar {
   height: 100%;
   background: currentColor;
-  border-radius: 4px;
+  border-radius: 3px;
   transition: width 0.3s ease;
   width: 0%;
 }
 
-.priority-row:nth-child(1) .priority-bar { color: #dc2626; }
-.priority-row:nth-child(2) .priority-bar { color: #ea580c; }
-.priority-row:nth-child(3) .priority-bar { color: #ca8a04; }
-.priority-row:nth-child(4) .priority-bar { color: #16a34a; }
-.priority-row:nth-child(5) .priority-bar { color: #6b7280; }
+.priority-row:nth-child(1) .priority-bar { color: #DC2626; }
+.priority-row:nth-child(2) .priority-bar { color: #F97316; }
+.priority-row:nth-child(3) .priority-bar { color: #F59E0B; }
+.priority-row:nth-child(4) .priority-bar { color: #10B981; }
+.priority-row:nth-child(5) .priority-bar { color: #6B7280; }
 
 .priority-count {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #4b5563;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #1A1A1A;
   min-width: 45px;
   text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .action-buttons {
@@ -268,13 +282,13 @@ body {
 
 .btn {
   width: 100%;
-  padding: 12px;
+  padding: 14px 16px;
   border: none;
-  border-radius: 8px;
-  font-size: 0.95rem;
+  border-radius: 10px;
+  font-size: 0.9375rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -282,35 +296,44 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #0D9488;
   color: white;
 }
 
 .btn-primary:hover {
+  background: #0F766E;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 .btn-secondary {
   background: white;
-  color: #667eea;
-  border: 2px solid #e5e7eb;
+  color: #4B5563;
+  border: 2px solid #E5E7EB;
 }
 
 .btn-secondary:hover {
-  border-color: #667eea;
-  background: #f9fafb;
+  border-color: #D1D5DB;
+  background: #F9FAFB;
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
 }
 
 .footer {
-  padding: 15px 20px;
-  background: #f9fafb;
+  padding: 16px 20px;
+  background: #FAFAFA;
   text-align: center;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid #F3F4F6;
 }
 
 .footer-text {
-  font-size: 0.85rem;
-  color: #6b7280;
+  font-size: 0.8125rem;
+  color: #6B7280;
   font-weight: 500;
 }
