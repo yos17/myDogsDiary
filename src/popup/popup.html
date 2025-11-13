@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusGuard+ Dashboard</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <div class="header">
+      <h1 class="title">🎯 FocusGuard+</h1>
+      <div class="status-badge" id="statusBadge">
+        <span class="status-dot" id="statusDot"></span>
+        <span class="status-text" id="statusText">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Motivational Quote -->
+    <div class="quote-banner" id="quoteBanner">
+      <div class="quote-content">
+        <p class="quote" id="dailyQuote">Loading quote...</p>
+        <p class="author" id="quoteAuthor"></p>
+      </div>
+      <button class="refresh-quote" id="refreshQuote" title="New quote">🔄</button>
+    </div>
+
+    <!-- Progress Overview -->
+    <div class="progress-section">
+      <h2 class="section-title">Today's Progress</h2>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="progress-stats">
+        <span id="progressText">0 of 0 tasks completed</span>
+        <span class="streak" id="streakText">🔥 0 day streak</span>
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="totalTasks">0</div>
+        <div class="stat-label">Total Tasks</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="completedTasks">0</div>
+        <div class="stat-label">Completed</div>
+      </div>
+      <div class="stat-card highlight">
+        <div class="stat-value" id="remainingTasks">0</div>
+        <div class="stat-label">Remaining</div>
+      </div>
+    </div>
+
+    <!-- Priority Summary -->
+    <div class="priority-summary">
+      <div class="priority-row">
+        <span class="priority-badge a">A</span>
+        <div class="priority-bar-container">
+          <div class="priority-bar" id="barA"></div>
+        </div>
+        <span class="priority-count" id="countA">0/0</span>
+      </div>
+      <div class="priority-row">
+        <span class="priority-badge b">B</span>
+        <div class="priority-bar-container">
+          <div class="priority-bar" id="barB"></div>
+        </div>
+        <span class="priority-count" id="countB">0/0</span>
+      </div>
+      <div class="priority-row">
+        <span class="priority-badge c">C</span>
+        <div class="priority-bar-container">
+          <div class="priority-bar" id="barC"></div>
+        </div>
+        <span class="priority-count" id="countC">0/0</span>
+      </div>
+      <div class="priority-row">
+        <span class="priority-badge d">D</span>
+        <div class="priority-bar-container">
+          <div class="priority-bar" id="barD"></div>
+        </div>
+        <span class="priority-count" id="countD">0/0</span>
+      </div>
+      <div class="priority-row">
+        <span class="priority-badge e">E</span>
+        <div class="priority-bar-container">
+          <div class="priority-bar" id="barE"></div>
+        </div>
+        <span class="priority-count" id="countE">0/0</span>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="btn btn-primary" id="openPlannerBtn">
+        📋 Open ABCDE Planner
+      </button>
+      <button class="btn btn-secondary" id="settingsBtn">
+        ⚙️ Settings
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p class="footer-text">Complete your plan to unlock early! 💪</p>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

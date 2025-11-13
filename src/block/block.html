@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusGuard+ - Stay Focused</title>
+  <link rel="stylesheet" href="block.css">
+</head>
+<body>
+  <div class="container">
+    <div class="logo-section">
+      <h1 class="logo">🎯 FocusGuard+</h1>
+      <p class="tagline">Stay focused. Complete your plan.</p>
+    </div>
+
+    <div class="quote-card" id="quoteCard">
+      <div class="quote-icon">💭</div>
+      <blockquote class="quote-text" id="quoteText">Loading...</blockquote>
+      <cite class="quote-author" id="quoteAuthor"></cite>
+    </div>
+
+    <div class="status-card" id="statusCard">
+      <div class="status-icon" id="statusIcon">⏰</div>
+      <h2 class="status-title" id="statusTitle">Site Blocked</h2>
+      <p class="status-message" id="statusMessage">Complete your ABCDE plan to unlock access.</p>
+
+      <div class="task-summary" id="taskSummary">
+        <div class="task-stat">
+          <span class="task-label">Total Tasks</span>
+          <span class="task-value" id="totalTasks">0</span>
+        </div>
+        <div class="task-stat">
+          <span class="task-label">Completed</span>
+          <span class="task-value" id="completedTasks">0</span>
+        </div>
+        <div class="task-stat">
+          <span class="task-label">Remaining</span>
+          <span class="task-value highlight" id="remainingTasks">0</span>
+        </div>
+      </div>
+
+      <div class="priority-breakdown" id="priorityBreakdown">
+        <h3>Task Priority Breakdown</h3>
+        <div class="priority-list">
+          <div class="priority-item" id="priorityA">
+            <span class="priority-badge a">A</span>
+            <span class="priority-text">Must do</span>
+            <span class="priority-count" id="countA">0/0</span>
+          </div>
+          <div class="priority-item" id="priorityB">
+            <span class="priority-badge b">B</span>
+            <span class="priority-text">Should do</span>
+            <span class="priority-count" id="countB">0/0</span>
+          </div>
+          <div class="priority-item" id="priorityC">
+            <span class="priority-badge c">C</span>
+            <span class="priority-text">Nice to do</span>
+            <span class="priority-count" id="countC">0/0</span>
+          </div>
+          <div class="priority-item" id="priorityD">
+            <span class="priority-badge d">D</span>
+            <span class="priority-text">Delegate</span>
+            <span class="priority-count" id="countD">0/0</span>
+          </div>
+          <div class="priority-item" id="priorityE">
+            <span class="priority-badge e">E</span>
+            <span class="priority-text">Eliminate</span>
+            <span class="priority-count" id="countE">0/0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn btn-primary" id="viewPlanBtn">
+        📋 View Today's ABCDE Plan
+      </button>
+      <button class="btn btn-secondary" id="goBackBtn">
+        ← Go Back to Work
+      </button>
+    </div>
+
+    <div class="blocked-url" id="blockedUrl"></div>
+
+    <div class="motivational-footer">
+      <p>You're almost there. Stay focused. 💪</p>
+    </div>
+  </div>
+
+  <script src="block.js"></script>
+</body>
+</html>

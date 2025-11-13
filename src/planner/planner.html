@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusGuard+ - ABCDE Planner</title>
+  <link rel="stylesheet" href="planner.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1 class="logo">🎯 FocusGuard+</h1>
+        <p class="subtitle">ABCDE Priority Planning System</p>
+      </div>
+      <div class="header-stats">
+        <div class="stat">
+          <span class="stat-label">Completed Today</span>
+          <span class="stat-value" id="headerCompleted">0/0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Streak</span>
+          <span class="stat-value streak" id="headerStreak">🔥 0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-tab="tasks">📋 Tasks</button>
+      <button class="tab" data-tab="settings">⚙️ Settings</button>
+      <button class="tab" data-tab="about">ℹ️ About ABCDE</button>
+    </div>
+
+    <!-- Tasks Tab -->
+    <div class="tab-content active" id="tasks-tab">
+      <!-- Add Task Form -->
+      <div class="add-task-section">
+        <h2>Add New Task</h2>
+        <form id="addTaskForm">
+          <div class="form-group">
+            <label for="taskTitle">Task Title *</label>
+            <input type="text" id="taskTitle" placeholder="What needs to be done?" required>
+          </div>
+
+          <div class="form-group">
+            <label for="taskNotes">Notes (optional)</label>
+            <textarea id="taskNotes" placeholder="Additional details..." rows="2"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="taskPriority">Priority *</label>
+            <select id="taskPriority" required>
+              <option value="A">A - Must do (critical)</option>
+              <option value="B">B - Should do (important)</option>
+              <option value="C">C - Nice to do</option>
+              <option value="D">D - Delegate</option>
+              <option value="E">E - Eliminate</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary">➕ Add Task</button>
+        </form>
+      </div>
+
+      <!-- Task List -->
+      <div class="task-list-section">
+        <div class="task-list-header">
+          <h2>Today's Tasks</h2>
+          <button class="btn-icon" id="clearCompletedBtn" title="Clear completed tasks">
+            🗑️ Clear Completed
+          </button>
+        </div>
+
+        <div id="tasksList" class="tasks-list">
+          <!-- Tasks will be inserted here dynamically -->
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <p class="empty-icon">📝</p>
+          <p class="empty-text">No tasks yet. Add your first task above!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Tab -->
+    <div class="tab-content" id="settings-tab">
+      <div class="settings-section">
+        <h2>⏰ Work Hours</h2>
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="workHoursEnabled">
+            <span>Enable work hours blocking</span>
+          </label>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="workStart">Start Time</label>
+            <input type="time" id="workStart">
+          </div>
+          <div class="form-group">
+            <label for="workEnd">End Time</label>
+            <input type="time" id="workEnd">
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h2>🚫 Blocked Websites</h2>
+        <div class="form-group">
+          <label for="blockedSites">Enter websites to block (one per line)</label>
+          <textarea id="blockedSites" rows="8" placeholder="facebook.com&#10;twitter.com&#10;youtube.com&#10;reddit.com"></textarea>
+          <p class="help-text">You can use wildcards like *.facebook.com</p>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h2>🎯 Unlock Modes</h2>
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="strictMode">
+            <span><strong>Strict Mode</strong> - Block sites outside work hours until tasks complete</span>
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="lenientMode">
+            <span><strong>Lenient Mode</strong> - Unlock everything after completing only A-tasks</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h2>🔄 Daily Reset</h2>
+        <div class="form-group">
+          <label for="resetTime">Reset tasks at</label>
+          <input type="time" id="resetTime">
+          <p class="help-text">All tasks will be cleared at this time each day</p>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="saveSettingsBtn">💾 Save Settings</button>
+      <div class="save-message" id="saveMessage">Settings saved! ✓</div>
+    </div>
+
+    <!-- About Tab -->
+    <div class="tab-content" id="about-tab">
+      <div class="about-section">
+        <h2>🐸 About the ABCDE Method</h2>
+        <p class="intro-text">
+          The ABCDE method is a powerful prioritization system from Brian Tracy's bestselling book
+          "Eat That Frog!" It helps you focus on what truly matters.
+        </p>
+
+        <div class="priority-explanation">
+          <div class="priority-card">
+            <div class="priority-badge a">A</div>
+            <h3>A - Must Do</h3>
+            <p>Critical tasks with serious consequences if not done. These are your "frogs" -
+            eat them first! Examples: project deadlines, important meetings, urgent problems.</p>
+          </div>
+
+          <div class="priority-card">
+            <div class="priority-badge b">B</div>
+            <h3>B - Should Do</h3>
+            <p>Important tasks with mild consequences. Do these after your A tasks.
+            Examples: returning calls, routine reports, minor issues.</p>
+          </div>
+
+          <div class="priority-card">
+            <div class="priority-badge c">C</div>
+            <h3>C - Nice to Do</h3>
+            <p>Tasks with no consequences. Do these only after A and B tasks are complete.
+            Examples: coffee with a colleague, checking personal email.</p>
+          </div>
+
+          <div class="priority-card">
+            <div class="priority-badge d">D</div>
+            <h3>D - Delegate</h3>
+            <p>Tasks that someone else can do. Free up your time for A and B tasks.
+            Examples: routine tasks, administrative work that others can handle.</p>
+          </div>
+
+          <div class="priority-card">
+            <div class="priority-badge e">E</div>
+            <h3>E - Eliminate</h3>
+            <p>Tasks that don't need to be done at all. Learn to say no!
+            Examples: time wasters, unnecessary meetings, busywork.</p>
+          </div>
+        </div>
+
+        <div class="quote-box">
+          <p class="quote-large">
+            "The hardest part of any important task is getting started on it in the first place."
+          </p>
+          <p class="quote-attribution">— Brian Tracy</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="planner.js"></script>
+</body>
+</html>
