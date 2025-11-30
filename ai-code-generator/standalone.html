@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Code Studio - Standalone Demo</title>
+    <style>
+/* Complete embedded styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #6366f1;
+    --secondary: #8b5cf6;
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --border: #475569;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.demo-area {
+    background: var(--bg-primary);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.preview {
+    background: white;
+    border-radius: 8px;
+    padding: 40px;
+    min-height: 400px;
+    text-align: center;
+}
+
+.preview h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.preview p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.button {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 10px;
+    transition: transform 0.2s;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.info-box {
+    background: var(--bg-tertiary);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border-left: 4px solid var(--primary);
+}
+
+.code-box {
+    background: #000;
+    color: #0f0;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    overflow-x: auto;
+    margin: 10px 0;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.feature-card {
+    background: var(--bg-tertiary);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ AI Code Studio</h1>
+        <p class="tagline">Build. Preview. Deploy. (Standalone Demo)</p>
+
+        <div class="info-box">
+            <h3>📱 Standalone Version</h3>
+            <p>This is a simplified standalone demo that works without a server. You can open this file directly on any device!</p>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI-Powered</h3>
+                <p>Generate code with natural language</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Visual Editor</h3>
+                <p>Click-to-edit any element</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💻</div>
+                <h3>Live Preview</h3>
+                <p>See changes instantly</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>One-Click Deploy</h3>
+                <p>Export and share easily</p>
+            </div>
+        </div>
+
+        <div class="demo-area">
+            <h2 style="margin-bottom: 20px;">🎯 Try It Out</h2>
+
+            <div style="margin: 20px 0;">
+                <input type="text" id="userPrompt" placeholder="Type what you want to build..."
+                    style="width: 100%; padding: 15px; border-radius: 8px; border: 2px solid var(--border); background: var(--bg-tertiary); color: white; font-size: 16px;">
+            </div>
+
+            <button class="button" onclick="generateDemo()">✨ Generate Demo</button>
+            <button class="button" onclick="showTemplate()">📚 Load Template</button>
+            <button class="button" onclick="showInfo()">ℹ️ How to Use Full Version</button>
+
+            <div class="preview" id="preview">
+                <h2>👋 Welcome to AI Code Studio!</h2>
+                <p>This is a standalone demo showing the interface.</p>
+                <p>Type something in the box above and click "Generate Demo" to see how it works!</p>
+            </div>
+        </div>
+
+        <div class="info-box" style="margin-top: 30px;">
+            <h3>🔧 To Use the Full Version:</h3>
+            <div class="code-box">
+# On your computer, run:
+cd /home/user/myDogsDiary/ai-code-generator
+python3 -m http.server 8080 --bind 0.0.0.0
+
+# Then open in browser:
+http://localhost:8080
+            </div>
+            <p style="margin-top: 15px;">Or simply open <strong>index.html</strong> in your browser!</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; opacity: 0.7;">
+            <p>Built with ❤️ combining Base44, Loveable, and Bolt</p>
+            <p style="font-size: 12px; margin-top: 10px;">Pure HTML/CSS/JavaScript - No dependencies</p>
+        </div>
+    </div>
+
+    <script>
+        function generateDemo() {
+            const prompt = document.getElementById('userPrompt').value || 'a beautiful landing page';
+            const preview = document.getElementById('preview');
+
+            preview.innerHTML = `
+                <h2>✅ Generated: ${prompt}</h2>
+                <div style="margin: 20px 0; padding: 20px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 12px; color: white;">
+                    <h3>Your ${prompt}</h3>
+                    <p style="color: white;">This is a demo preview. The full version generates actual HTML, CSS, and JavaScript code!</p>
+                </div>
+                <div style="text-align: left; margin-top: 20px;">
+                    <h4 style="color: #333;">Generated Code:</h4>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; text-align: left; overflow-x: auto; color: #333;"><code>&lt;div class="app"&gt;
+  &lt;h1&gt;${prompt}&lt;/h1&gt;
+  &lt;p&gt;Built with AI Code Studio&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            `;
+        }
+
+        function showTemplate() {
+            const preview = document.getElementById('preview');
+            preview.innerHTML = `
+                <h2>📚 Templates Available</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px;">
+                        <div style="font-size: 32px;">✅</div>
+                        <h4 style="color: #333;">Todo App</h4>
+                    </div>
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px;">
+                        <div style="font-size: 32px;">🔢</div>
+                        <h4 style="color: #333;">Calculator</h4>
+                    </div>
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px;">
+                        <div style="font-size: 32px;">🚀</div>
+                        <h4 style="color: #333;">Landing Page</h4>
+                    </div>
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px;">
+                        <div style="font-size: 32px;">📊</div>
+                        <h4 style="color: #333;">Dashboard</h4>
+                    </div>
+                </div>
+                <p style="color: #666;">The full version includes 8 pre-built templates!</p>
+            `;
+        }
+
+        function showInfo() {
+            const preview = document.getElementById('preview');
+            preview.innerHTML = `
+                <h2>ℹ️ About AI Code Studio</h2>
+                <div style="text-align: left; max-width: 600px; margin: 0 auto;">
+                    <h3 style="color: #333; margin-top: 20px;">🎯 Features:</h3>
+                    <ul style="color: #666; line-height: 2;">
+                        <li>✅ AI-powered code generation</li>
+                        <li>🎨 Visual click-to-edit interface</li>
+                        <li>💻 Built-in code editor (HTML, CSS, JS)</li>
+                        <li>👁️ Live preview with device simulator</li>
+                        <li>📦 Export to ZIP, GitHub, CodePen</li>
+                        <li>🗄️ Supabase integration support</li>
+                        <li>📱 Fully responsive design</li>
+                        <li>🚀 One-click deployment</li>
+                    </ul>
+                    <h3 style="color: #333; margin-top: 20px;">📂 Files:</h3>
+                    <ul style="color: #666; line-height: 2;">
+                        <li><code>index.html</code> - Main application</li>
+                        <li><code>app.js</code> - Core logic (42KB)</li>
+                        <li><code>visual-editor.js</code> - Click-to-edit feature</li>
+                        <li><code>styles.css</code> - Main styling</li>
+                        <li><code>enhancements.css</code> - Premium effects</li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        // Auto-show welcome message
+        console.log('✨ AI Code Studio Standalone Demo Loaded!');
+        console.log('📁 Location: /home/user/myDogsDiary/ai-code-generator/');
+        console.log('🔗 Full version: Open index.html in browser');
+    </script>
+</body>
+</html>
