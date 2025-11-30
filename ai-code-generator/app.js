@@ -1469,4 +1469,9 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 // Initialize the app
-const app = new AICodeStudio();
+let app;
+document.addEventListener('DOMContentLoaded', () => {
+    app = new AICodeStudio();
+    window.app = app; // Expose globally for visual editor
+    console.log('✨ AI Code Studio initialized successfully!');
+});
