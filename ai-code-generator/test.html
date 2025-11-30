@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page - AI Code Studio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .status {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        a {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>✅ Server is Working!</h1>
+    <div class="status">
+        <p>✨ AI Code Studio is ready</p>
+        <p>📱 You can access this on your phone</p>
+        <p>🌐 IP: <strong id="ip">Loading...</strong></p>
+        <p>🔗 Port: <strong>8080</strong></p>
+    </div>
+    <a href="index.html">Open AI Code Studio →</a>
+
+    <script>
+        // Display current time to verify JS is working
+        document.getElementById('ip').textContent = window.location.hostname;
+        console.log('✅ Test page loaded successfully!');
+
+        // Test if main app files exist
+        fetch('app.js')
+            .then(res => console.log('✅ app.js found'))
+            .catch(err => console.error('❌ app.js not found'));
+        fetch('styles.css')
+            .then(res => console.log('✅ styles.css found'))
+            .catch(err => console.error('❌ styles.css not found'));
+    </script>
+</body>
+</html>

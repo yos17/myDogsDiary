@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📱 Open on Phone - AI Code Studio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .url-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .url {
+            font-size: 32px;
+            font-weight: bold;
+            background: white;
+            color: #667eea;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+        }
+        .steps {
+            text-align: left;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        .step {
+            margin: 15px 0;
+            font-size: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .step-number {
+            background: white;
+            color: #667eea;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 20px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 20px;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+        .button:hover {
+            transform: translateY(-3px);
+        }
+        .qr-placeholder {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px auto;
+            display: inline-block;
+        }
+        .emoji {
+            font-size: 64px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">📱</div>
+        <h1>Open on Your Phone</h1>
+
+        <div class="url-box">
+            <p style="margin-bottom: 15px; font-size: 20px;">Type this URL on your phone:</p>
+            <div class="url" id="url">http://21.0.0.94:8080</div>
+            <button class="button" onclick="copyURL()" style="border: none; cursor: pointer; margin-top: 20px;">
+                📋 Copy URL
+            </button>
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>
+                    <strong>Connect to WiFi</strong><br>
+                    Make sure your phone is on the same WiFi network as this computer
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>
+                    <strong>Open Browser</strong><br>
+                    Open Chrome, Safari, or any browser on your phone
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>
+                    <strong>Type URL</strong><br>
+                    Type or paste: <code style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 5px;">http://21.0.0.94:8080</code>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div>
+                    <strong>Start Building!</strong><br>
+                    You'll see AI Code Studio and can start creating apps with AI
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <a href="index.html" class="button">🖥️ Open on Desktop</a>
+            <a href="test.html" class="button">🧪 Test Connection</a>
+        </div>
+
+        <div style="margin-top: 40px; opacity: 0.8; font-size: 14px;">
+            <p>🔗 Server Status: <strong style="color: #0f0;">● Online</strong></p>
+            <p>🌐 IP Address: <strong><span id="current-ip">...</span></strong></p>
+            <p>🔌 Port: <strong>8080</strong></p>
+        </div>
+    </div>
+
+    <script>
+        // Show current accessing IP
+        document.getElementById('current-ip').textContent = window.location.hostname;
+
+        function copyURL() {
+            const url = document.getElementById('url').textContent;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('✅ URL copied! Paste it in your phone browser.');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('✅ URL copied! Paste it in your phone browser.');
+            });
+        }
+
+        // Auto-detect and show connection info
+        console.log('📱 Mobile Access Page Loaded');
+        console.log('🌐 Access from: ' + window.location.href);
+        console.log('📡 IP: 21.0.0.94:8080');
+    </script>
+</body>
+</html>
