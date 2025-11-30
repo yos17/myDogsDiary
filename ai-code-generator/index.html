@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Code Studio - Build Apps with AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <h1 class="logo">⚡ AI Code Studio</h1>
+            <span class="tagline">Build. Preview. Deploy.</span>
+        </div>
+        <div class="header-center">
+            <div class="model-selector">
+                <label>AI Model:</label>
+                <select id="modelSelect">
+                    <option value="auto">Auto-Select</option>
+                    <option value="claude">Claude Sonnet 4</option>
+                    <option value="gpt4">GPT-4</option>
+                    <option value="gemini">Gemini Pro</option>
+                </select>
+            </div>
+            <div class="mode-toggle">
+                <button id="buildMode" class="active">Build</button>
+                <button id="discussMode">Discuss</button>
+            </div>
+        </div>
+        <div class="header-right">
+            <button id="templateBtn" class="btn-secondary">📚 Templates</button>
+            <button id="exportBtn" class="btn-secondary">📥 Export</button>
+            <button id="deployBtn" class="btn-primary">🚀 Deploy</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar - Chat Interface -->
+        <aside class="sidebar">
+            <div class="chat-header">
+                <h2>AI Assistant</h2>
+                <div class="chat-controls">
+                    <button id="newChatBtn" title="New Chat">➕</button>
+                    <button id="historyBtn" title="History">📜</button>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="message assistant">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        <p>👋 Hi! I'm your AI coding assistant. Tell me what you want to build!</p>
+                        <p><strong>Try:</strong></p>
+                        <ul>
+                            <li>"Build a todo app with dark mode"</li>
+                            <li>"Create a landing page for a SaaS product"</li>
+                            <li>"Make a calculator with scientific functions"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <textarea
+                    id="chatInput"
+                    placeholder="Describe your app or feature..."
+                    rows="3"
+                ></textarea>
+                <div class="input-actions">
+                    <button id="attachBtn" class="icon-btn" title="Attach image">📎</button>
+                    <button id="voiceBtn" class="icon-btn" title="Voice input">🎤</button>
+                    <button id="sendBtn" class="btn-send">Send ➤</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Editor & Preview Area -->
+        <main class="editor-area">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-tab="preview">👁️ Preview</button>
+                <button class="tab" data-tab="html">HTML</button>
+                <button class="tab" data-tab="css">CSS</button>
+                <button class="tab" data-tab="js">JavaScript</button>
+                <button class="tab" data-tab="terminal">Terminal</button>
+                <div class="tab-actions">
+                    <button id="copyCodeBtn" class="icon-btn" title="Copy code">📋</button>
+                    <button id="downloadBtn" class="icon-btn" title="Download">💾</button>
+                    <button id="fullscreenBtn" class="icon-btn" title="Fullscreen">⛶</button>
+                </div>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Preview Tab -->
+                <div class="tab-pane active" id="previewPane">
+                    <div class="preview-controls">
+                        <div class="device-selector">
+                            <button class="device-btn active" data-device="desktop">💻</button>
+                            <button class="device-btn" data-device="tablet">📱</button>
+                            <button class="device-btn" data-device="mobile">📱</button>
+                        </div>
+                        <button id="refreshPreview" class="icon-btn">🔄 Refresh</button>
+                        <div class="preview-url">
+                            <span>Preview URL:</span>
+                            <input type="text" id="previewUrl" value="about:blank" readonly>
+                        </div>
+                    </div>
+                    <div class="preview-container" id="previewContainer">
+                        <iframe id="preview" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+                    </div>
+                </div>
+
+                <!-- HTML Tab -->
+                <div class="tab-pane" id="htmlPane">
+                    <div class="editor-header">
+                        <span>index.html</span>
+                        <button class="format-btn" data-lang="html">Format</button>
+                    </div>
+                    <textarea id="htmlEditor" class="code-editor" spellcheck="false"></textarea>
+                </div>
+
+                <!-- CSS Tab -->
+                <div class="tab-pane" id="cssPane">
+                    <div class="editor-header">
+                        <span>styles.css</span>
+                        <button class="format-btn" data-lang="css">Format</button>
+                    </div>
+                    <textarea id="cssEditor" class="code-editor" spellcheck="false"></textarea>
+                </div>
+
+                <!-- JavaScript Tab -->
+                <div class="tab-pane" id="jsPane">
+                    <div class="editor-header">
+                        <span>script.js</span>
+                        <button class="format-btn" data-lang="js">Format</button>
+                    </div>
+                    <textarea id="jsEditor" class="code-editor" spellcheck="false"></textarea>
+                </div>
+
+                <!-- Terminal Tab -->
+                <div class="tab-pane" id="terminalPane">
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <span>Console Output</span>
+                            <button id="clearConsole">Clear</button>
+                        </div>
+                        <div class="terminal-content" id="terminalContent">
+                            <div class="terminal-line">AI Code Studio Terminal v1.0.0</div>
+                            <div class="terminal-line">Ready to build amazing apps!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Template Modal -->
+    <div id="templateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Choose a Template</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="template-grid" id="templateGrid">
+                    <!-- Templates will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div id="exportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Export Options</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="export-options">
+                    <button class="export-option" id="exportZip">
+                        <span class="icon">📦</span>
+                        <span class="label">Download ZIP</span>
+                    </button>
+                    <button class="export-option" id="exportGithub">
+                        <span class="icon">🐙</span>
+                        <span class="label">Export to GitHub</span>
+                    </button>
+                    <button class="export-option" id="exportCodepen">
+                        <span class="icon">🖊️</span>
+                        <span class="label">Open in CodePen</span>
+                    </button>
+                    <button class="export-option" id="exportCodesandbox">
+                        <span class="icon">📦</span>
+                        <span class="label">Open in CodeSandbox</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>AI is generating your code...</p>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="visual-editor.js"></script>
+</body>
+</html>
